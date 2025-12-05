@@ -250,15 +250,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Data Siswa</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"> 
+                                <a href="tambah_siswa.php"
+                            class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
+                        </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -304,16 +304,24 @@
                                             <td> <?php echo $data['agama'] ?> </td>
                                             <td> <?php echo $data['kd_ortu'] ?> </td>
                                             <td> <?php echo $data['tgl_daftar'] ?> </td>
-                                            <td> 
-                                                <a href="edit_siswa.php?nis=<?php echo $data['nis'] ?>"> Edit</a> | 
-                                                <a href="hapus_siswa.php?nis=<?php echo $data['nis'] ?>"> Hapus</a> 
+                                            <td class="text-center">
+                                                <div>
+                                                  <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                        action="hapus_siswa.php?id_siswa=<?php echo $data ['id_siswa'] ?>" method="POST">
+                                                        
+                                                        <a href="edit_siswa.php?id_siswa=<?php echo $data ['id_siswa'] ?>"
+                                                            class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>>
 
                 </div>
                 <!-- /.container-fluid -->

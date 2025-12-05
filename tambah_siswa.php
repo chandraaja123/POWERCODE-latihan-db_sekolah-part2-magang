@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Pengguna</title>
+    <title>Web Admin - Tabel Siswa</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -249,67 +249,143 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Data Pengguna</h1>
-                    
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><strong>Tambah Data Siswa</strong></h1>
+</div>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> 
-                                <a href="tambah_pengguna.php"
-                            class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
-                        </h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Kata Kunci</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                    <?php
-            // Panggil Koneksi
+<div class="container">
+<?php 
+        if(isset($_POST["btnSimpan"])){
             include "koneksi.php";
 
-            $sql     ="select * from tb_pengguna";
-            $hasil   = mysqli_query($konek, $sql);
-            $no      = 1;
+            // Deklarasi Variabel Untuk Menampung Data Inputan
+            $nis         = $_POST['nis'];
+            $nama        = $_POST['nama'];
+            $id_kelas    = $_POST['id_kelas'];
+            $alamat      = $_POST['alamat'];
+            $tmpt_lahir  = $_POST['tmpt_lahir'];
+            $tgl_lahir   = $_POST['tgl_lahir'];
+            $gender      = $_POST['gender'];
+            $agama       = $_POST['agama'];
+            $kd_ortu     = $_POST['kd_ortu'];
+            $tgl_daftar  = $_POST['tgl_daftar'];
 
-            // Untuk Menampilkan Data Secara Berulang Sesuai Data Yang Ada di Database
-            while($data=mysqli_fetch_array($hasil)){
-            ?>
-                                        <tr>
-                                            <td><?php echo $no++ ?></td>
-                                            <td><?php echo $data ['nama'] ?> </td>
-                                            <td><?php echo $data ['kata_kunci'] ?></td>
-                                            <td class="text-center">
-                                                <div>
-                                                  <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                        action="hapus_pengguna.php?id=<?php echo $data ['id_pengguna'] ?>" method="POST">
-                                                        
-                                                        <a href="edit_pengguna.php?id=<?php echo $data ['id_pengguna'] ?>"
-                                                            class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
+            // Query Simpan Data
+            $sql = "INSERT INTO tb_siswa (nis, nama, id_kelas, alamat, tmpt_lahir, tgl_lahir, gender, agama, kd_ortu, tgl_daftar)
+                        VALUES ('$nis', '$nama', '$id_kelas', '$alamat', '$tmpt_lahir', '$tgl_lahir', '$gender', '$agama', '$kd_ortu', '$tgl_daftar')";
+
+            // Eksklusi Perintah SQL dan Cek Koneksi ke Database
+            $qrySimpan  = mysqli_query ($konek, $sql);
+
+            // Cek Berhasil Atau Gagal Simpan
+            if($qrySimpan){
+                echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
+            } else {
+                echo "Data Gagal Disimpan";
+            }
+        }  
+        ?>
+
+   <form action="" method="POST">
+    
+     <div class="row">
+         
+            <div class="col-md-8 col-xs-12">
+                <div class="card">
+                    <div class="card-body text-dark">
+     
+                    <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Nis<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Nis"  name="nis">
                             </div>
                         </div>
-                    </div>
 
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Nama"   name="nama">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Id Kelas<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Id Kelas" name="id_kelas">
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Alamat<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Alamat" name="alamat">
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Tempat Lahir<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Tempat Lahir" name="tmpt_lahir">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">tgl_lahir<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Tanggal Lahir" name="tgl_lahir">
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Gender<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Gender" name="gender">
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Agomo" name="agama">
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Kode Orang Tua<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="Kode Orang Tua" name="kd_ortu">
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Tanggal Daftar<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                                <input type="text" required="" class="form-control" placeholder="TAnggal Daftar" name="tgl_daftar">
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group col-md-12">
+                            <input type="submit" name="btnSimpan" class="btn btn-warning" value="Simpan Data"><span class="glyphicon glyphicon-check"></span>
+                            
+                            <a href="data_siswa.php" class="btn btn-success">Kembali</a>
+                        </div>
+                      
+                
+                       
+                    </div>
                 </div>
-                <!-- /.container-fluid -->
+            </div>
+            <br>
+        </div>
+
+   </form>
+
+</div>
+
+</div>
 
             </div>
             <!-- End of Main Content -->

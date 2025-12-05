@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Pengguna</title>
+    <title>Web Admin - Tabel Orang Tua</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -250,14 +250,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Data Pengguna</h1>
-                    
+                    <h1 class="h3 mb-2 text-gray-800">Data Orang Tua</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary"> 
-                                <a href="tambah_pengguna.php"
+                                <a href="tambah_orangtua.php"
                             class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
                         </h6>
                         </div>
@@ -265,12 +264,17 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Kata Kunci</th>
-                                            <th>Aksi</th>
-                                        </tr>
+                                    <tr>
+                                    <td>No.</td>
+                                        <td>Kode Orang Tua</td>
+                                        <td>Nama Orang Tua</td>
+                                        <td>Alamat Orang Tua</td>
+                                        <td>Telepon Orang Tua</td>
+                                        <td>Pekerjaan Orang Tua</td>
+                                        <td>Agama Orang Tua</td>
+                                        <td>Status Orang Tua</td>
+                                        <td>Aksi</td>
+                                    </tr>
                                     </thead>
                                     
                                     <tbody>
@@ -278,7 +282,7 @@
             // Panggil Koneksi
             include "koneksi.php";
 
-            $sql     ="select * from tb_pengguna";
+            $sql     ="select * from tb_orangtua";
             $hasil   = mysqli_query($konek, $sql);
             $no      = 1;
 
@@ -286,15 +290,20 @@
             while($data=mysqli_fetch_array($hasil)){
             ?>
                                         <tr>
-                                            <td><?php echo $no++ ?></td>
-                                            <td><?php echo $data ['nama'] ?> </td>
-                                            <td><?php echo $data ['kata_kunci'] ?></td>
+                                        <td> <?php echo $no++ ?> </td>
+                                            <td> <?php echo $data['kd_ortu'] ?> </td>
+                                            <td> <?php echo $data['nama'] ?> </td>
+                                            <td> <?php echo $data['alamat'] ?> </td>
+                                            <td> <?php echo $data['telp'] ?> </td>
+                                            <td> <?php echo $data['pekerjaan'] ?> </td>
+                                            <td> <?php echo $data['agama'] ?> </td>
+                                            <td> <?php echo $data['status'] ?> </td>
                                             <td class="text-center">
                                                 <div>
-                                                  <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                        action="hapus_pengguna.php?id=<?php echo $data ['id_pengguna'] ?>" method="POST">
+                                                  <form onsubmit="return confirm('Hapus Data Orang Tua ?');"
+                                                        action="hapus_orangtua.php?id_ortu=<?php echo $data ['id_ortu'] ?>" method="POST">
                                                         
-                                                        <a href="edit_pengguna.php?id=<?php echo $data ['id_pengguna'] ?>"
+                                                        <a href="edit_orangtua.php?id_ortu=<?php echo $data ['id_ortu'] ?>"
                                                             class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                                     </form>
@@ -306,7 +315,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>>
 
                 </div>
                 <!-- /.container-fluid -->

@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Pengguna</title>
+    <title>Web Admin - Tabel Siswa</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -250,63 +254,20 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Data Pengguna</h1>
-                    
+                    <h1 class="h3 mb-2 text-gray-800">Data Siswa</h1>
+                    <?php
+    include "koneksi.php";
+    $sql   = "DELETE FROM tb_siswa WHERE id_siswa='$_GET[id_siswa]'";
+    $hasil  = mysqli_query($konek, $sql);;
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> 
-                                <a href="tambah_pengguna.php"
-                            class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
-                        </h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Kata Kunci</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                    <?php
-            // Panggil Koneksi
-            include "koneksi.php";
-
-            $sql     ="select * from tb_pengguna";
-            $hasil   = mysqli_query($konek, $sql);
-            $no      = 1;
-
-            // Untuk Menampilkan Data Secara Berulang Sesuai Data Yang Ada di Database
-            while($data=mysqli_fetch_array($hasil)){
-            ?>
-                                        <tr>
-                                            <td><?php echo $no++ ?></td>
-                                            <td><?php echo $data ['nama'] ?> </td>
-                                            <td><?php echo $data ['kata_kunci'] ?></td>
-                                            <td class="text-center">
-                                                <div>
-                                                  <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                        action="hapus_pengguna.php?id=<?php echo $data ['id_pengguna'] ?>" method="POST">
-                                                        
-                                                        <a href="edit_pengguna.php?id=<?php echo $data ['id_pengguna'] ?>"
-                                                            class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+        if($hasil){
+            echo '<div class="alert alert-success mt-3">Data Berhasil di Hapus 👍</div>'; 
+        } else{
+            echo "Data Gagal Dihapus";
+        }
+        echo "<br><br>
+        <a href='data_siswa.php'>Kembali ke Data Siswa</a>";
+?>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -329,25 +290,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -369,3 +312,15 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
