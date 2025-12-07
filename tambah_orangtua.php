@@ -251,55 +251,38 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>Ubah Data Orang Tua</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>Tambah Data Orang Tua</strong></h1>
 </div>
 
 <div class="container">
 <?php 
+        if(isset($_POST["btnSimpan"])){
+            include "koneksi.php";
 
-    include "koneksi.php";
+            // Deklarasi Variabel Untuk Menampung Data Inputan
+            $kd_ortu   = $_POST['kd_ortu'];
+            $nama      = $_POST['nama'];
+            $alamat    = $_POST['alamat'];
+            $telp      = $_POST['telp'];
+            $pekerjaan = $_POST['pekerjaan'];
+            $agama     = $_POST['agama'];
+            $status    = $_POST['status'];
 
-    if(isset($_POST["btnSimpan"])){
+            // Query Simpan Data
+            $sql = "INSERT INTO tb_orangtua (kd_ortu, nama, alamat, telp, pekerjaan, agama, status)
+                        VALUES ('$kd_ortu', '$nama', '$alamat', '$telp', '$pekerjaan', '$agama', '$status')";
 
-    // Deklarasi Variabel Untuk Menampung Data Inputan
-        $kd_ortu   = $_POST['kd_ortu'];
-        $nama      = $_POST['nama'];
-        $alamat    = $_POST['alamat'];
-        $telp      = $_POST['telp'];
-        $pekerjaan = $_POST['pekerjaan'];
-        $agama     = $_POST['agama'];
-        $status    = $_POST['status'];
-    // Query Simpan Data
-    $sql = "UPDATE tb_orangtua SET 
-                            kd_ortu     ='$kd_ortu',
-                    nama        ='$nama',
-                    alamat      ='$alamat',
-                    telp        ='$telp',
-                    pekerjaan   ='$pekerjaan',
-                    agama       ='$agama',
-                    status      ='$status'
-                WHERE id_ortu  ='$_GET[id_ortu]'";
+            // Eksklusi Perintah SQL dan Cek Koneksi ke Database
+            $qrySimpan  = mysqli_query ($konek, $sql);
 
-                // Eksekusi query dan cek hasilnya
-                $qrySimpan = mysqli_query($konek, $sql);
-
-
-    // Eksklusi Perintah SQL dan Cek Koneksi ke Database
-    $qrySimpan  = mysqli_query ($konek, $sql);
-
-    // Cek Berhasil Atau Gagal Simpan
-    if($qrySimpan){
-        echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
-    } else {
-        echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
-    }
-    }  
-
-        // Menampilkan Data Dari Database
-        $sql   = "SELECT * FROM tb_orangtua WHERE id_ortu='$_GET[id_ortu]'";
-        $hasil  = mysqli_query($konek, $sql);
-        $row    = mysqli_fetch_array($hasil);
-?>
+            // Cek Berhasil Atau Gagal Simpan
+            if($qrySimpan){
+                echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
+            } else {
+                echo "Data Gagal Disimpan";
+            }
+        }  
+        ?>
 
    <form action="" method="POST">
     
@@ -309,17 +292,17 @@
                 <div class="card">
                     <div class="card-body text-dark">
      
-                        <div class="form-group row col-md-12">
+                    <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Kode Orang Tua<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Kode Orang Tua"  value ="<?php echo $row['kd_ortu'] ?>" name="kd_ortu">
+                                <input type="text" required="" class="form-control" placeholder="Kode Orang Tua" name="kd_ortu">
                             </div>
                         </div>
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Nama"  value ="<?php echo $row['nama'] ?>" name="nama">
+                                <input type="text" required="" class="form-control" placeholder="Nama" name="nama">
                             </div>
                         </div>
 
@@ -327,35 +310,35 @@
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Alamat<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Alamat" name="alamat" value ="<?php echo $row['alamat'] ?>">
+                                <input type="text" required="" class="form-control" placeholder="Alamat" name="alamat">
                             </div>
                         </div>
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Telepon<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Telepon" name="telp" value ="<?php echo $row['telp'] ?>">
+                                <input type="text" required="" class="form-control" placeholder="Telepon" name="telp">
                             </div>
                         </div>
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Perkerjaan<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Pekerjaan" name="pekerjaan" value ="<?php echo $row['pekerjaan'] ?>">
+                                <input type="text" required="" class="form-control" placeholder="Perkerjaan" name="pekerjaan">
                             </div>
                         </div>
                         
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Agomo" name="agama" value ="<?php echo $row['agama'] ?>">
+                                <input type="text" required="" class="form-control" placeholder="Agomo" name="agama">
                             </div>
                         </div>
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Status Orang Tua<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Status" name="status" value ="<?php echo $row['status'] ?>">
+                                <input type="text" required="" class="form-control" placeholder="Status" name="status">
                             </div>
                         </div>
 

@@ -274,7 +274,7 @@ if(isset($_POST["btnSimpan"])){
    $tgl_daftar  = $_POST['tgl_daftar'];
    // Query Simpan Data
    $sql = "UPDATE tb_siswa SET 
-                        nis        ='$nis',
+                        nis         ='$nis',
                         nama        ='$nama',
                         id_kelas    ='$id_kelas',
                         alamat      ='$alamat',

@@ -255,40 +255,40 @@
 </div>
 
 <div class="container">
-<?php 
+    <?php 
 
-include "koneksi.php";
+        include "koneksi.php";
 
-if(isset($_POST["btnSimpan"])){
+        if(isset($_POST["btnSimpan"])){
 
-   // Deklarasi Variabel Untuk Menampung Data Inputan
-   $nama       = $_POST["nama"];
-   $kata_kunci = $_POST["kata_kunci"];
+        // Deklarasi Variabel Untuk Menampung Data Inputan
+        $nama       = $_POST["nama"];
+        $kata_kunci = $_POST["kata_kunci"];
 
-   // Query Simpan Data
-   $sql = "update tb_pengguna set 
-               nama                ='$nama', 
-               kata_kunci          ='$kata_kunci' 
-           where id_pengguna       ='$_GET[id]'";
+        // Query Simpan Data
+        $sql = "update tb_pengguna set 
+                    nama                ='$nama', 
+                    kata_kunci          ='$kata_kunci' 
+                where id_pengguna       ='$_GET[id]'";
 
-   // Eksklusi Perintah SQL dan Cek Koneksi ke Database
-   $qrySimpan  = mysqli_query ($konek, $sql);
+        // Eksklusi Perintah SQL dan Cek Koneksi ke Database
+        $qrySimpan  = mysqli_query ($konek, $sql);
 
-   // Cek Berhasil Atau Gagal Simpan
-   if($qrySimpan){
-    echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
-   } else {
-       echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
-   }
-}  
+        // Cek Berhasil Atau Gagal Simpan
+        if($qrySimpan){
+            echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
+        } else {
+            echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
+        }
+        }  
 
-// Menampilkan Data Dari Database
-$sql    = "select * from tb_pengguna where id_pengguna ='$_GET[id]'";
-$hasil  = mysqli_query($konek, $sql);
-$row    = mysqli_fetch_array($hasil);
+        // Menampilkan Data Dari Database
+        $sql    = "select * from tb_pengguna where id_pengguna ='$_GET[id]'";
+        $hasil  = mysqli_query($konek, $sql);
+        $row    = mysqli_fetch_array($hasil);
 
 
-?>
+    ?>
 
    <form action="" method="POST">
     

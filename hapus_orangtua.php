@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -249,136 +253,24 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>Ubah Data Orang Tua</strong></h1>
-</div>
-
-<div class="container">
-<?php 
-
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Data Orang Tua</h1>
+                    <?php
     include "koneksi.php";
+    $sql   = "DELETE FROM tb_orangtua WHERE id_ortu='$_GET[id_ortu]'";
+    $hasil  = mysqli_query($konek, $sql);;
 
-    if(isset($_POST["btnSimpan"])){
-
-    // Deklarasi Variabel Untuk Menampung Data Inputan
-        $kd_ortu   = $_POST['kd_ortu'];
-        $nama      = $_POST['nama'];
-        $alamat    = $_POST['alamat'];
-        $telp      = $_POST['telp'];
-        $pekerjaan = $_POST['pekerjaan'];
-        $agama     = $_POST['agama'];
-        $status    = $_POST['status'];
-    // Query Simpan Data
-    $sql = "UPDATE tb_orangtua SET 
-                            kd_ortu     ='$kd_ortu',
-                    nama        ='$nama',
-                    alamat      ='$alamat',
-                    telp        ='$telp',
-                    pekerjaan   ='$pekerjaan',
-                    agama       ='$agama',
-                    status      ='$status'
-                WHERE id_ortu  ='$_GET[id_ortu]'";
-
-                // Eksekusi query dan cek hasilnya
-                $qrySimpan = mysqli_query($konek, $sql);
-
-
-    // Eksklusi Perintah SQL dan Cek Koneksi ke Database
-    $qrySimpan  = mysqli_query ($konek, $sql);
-
-    // Cek Berhasil Atau Gagal Simpan
-    if($qrySimpan){
-        echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
-    } else {
-        echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
-    }
-    }  
-
-        // Menampilkan Data Dari Database
-        $sql   = "SELECT * FROM tb_orangtua WHERE id_ortu='$_GET[id_ortu]'";
-        $hasil  = mysqli_query($konek, $sql);
-        $row    = mysqli_fetch_array($hasil);
+        if($hasil){
+            echo '<div class="alert alert-success mt-3">Data Berhasil di Hapus 👍</div>'; 
+        } else{
+            echo "Data Gagal Dihapus";
+        }
+        echo "<br><br>
+        <a href='data_orangtua.php'>Kembali ke Data Orang Tua</a>";
 ?>
 
-   <form action="" method="POST">
-    
-     <div class="row">
-         
-            <div class="col-md-8 col-xs-12">
-                <div class="card">
-                    <div class="card-body text-dark">
-     
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Kode Orang Tua<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Kode Orang Tua"  value ="<?php echo $row['kd_ortu'] ?>" name="kd_ortu">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Nama"  value ="<?php echo $row['nama'] ?>" name="nama">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Alamat<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Alamat" name="alamat" value ="<?php echo $row['alamat'] ?>">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Telepon<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Telepon" name="telp" value ="<?php echo $row['telp'] ?>">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Perkerjaan<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Pekerjaan" name="pekerjaan" value ="<?php echo $row['pekerjaan'] ?>">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Agomo" name="agama" value ="<?php echo $row['agama'] ?>">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Status Orang Tua<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Status" name="status" value ="<?php echo $row['status'] ?>">
-                            </div>
-                        </div>
-
-                        
-                        <div class="form-group col-md-12">
-                            <input type="submit" name="btnSimpan" class="btn btn-warning" value="Simpan Data"><span class="glyphicon glyphicon-check"></span>
-                            
-                            <a href="data_orangtua.php" class="btn btn-success">Kembali</a>
-                        </div>
-                      
-                
-                       
-                    </div>
                 </div>
-            </div>
-            <br>
-        </div>
-
-   </form>
-
-</div>
-
-</div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
@@ -398,25 +290,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -438,3 +312,15 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
