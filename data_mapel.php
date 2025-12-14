@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Siswa</title>
+    <title>Web Admin - Tabel Mapel</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -51,7 +51,7 @@
                     </form>
 
                     <!-- Topbar Search -->
-                    <!-- <form
+                    <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -62,7 +62,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form> -->
+                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -249,177 +249,64 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>Tambah Data Siswa</strong></h1>
-</div>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Data Mata Pelajaran</h1>
 
-<div class="container">
-<?php 
-        if(isset($_POST["btnSimpan"])){
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary"> 
+                                <a href="tambah_mapel.php"
+                            class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
+                        </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>Nama Mata Pelajaran</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                    <?php
+            // Panggil Koneksi
             include "koneksi.php";
 
-            // Deklarasi Variabel Untuk Menampung Data Inputan
-            $nis         = $_POST['nis'];
-            $nama        = $_POST['nama'];
-            $id_kelas    = $_POST['id_kelas'];
-            $alamat      = $_POST['alamat'];
-            $tmpt_lahir  = $_POST['tmpt_lahir'];
-            $tgl_lahir   = $_POST['tgl_lahir'];
-            $gender      = $_POST['gender'];
-            $agama       = $_POST['agama'];
-            $kd_ortu     = $_POST['kd_ortu'];
-            $tgl_daftar  = $_POST['tgl_daftar'];
+            $sql     ="select * from tb_mapel";
+            $hasil   = mysqli_query($konek, $sql);
+            $no      = 1;
 
-            // Query Simpan Data
-            $sql = "INSERT INTO tb_siswa (nis, nama, id_kelas, alamat, tmpt_lahir, tgl_lahir, gender, agama, kd_ortu, tgl_daftar)
-                        VALUES ('$nis', '$nama', '$id_kelas', '$alamat', '$tmpt_lahir', '$tgl_lahir', '$gender', '$agama', '$kd_ortu', '$tgl_daftar')";
-
-            // Eksklusi Perintah SQL dan Cek Koneksi ke Database
-            $qrySimpan  = mysqli_query ($konek, $sql);
-
-            // Cek Berhasil Atau Gagal Simpan
-            if($qrySimpan){
-                echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
-            } else {
-                echo '<div class="alert alert-warning mt-3"><b>Data Gagal Disimpan</></div>';
-            }
-        }  
-        ?>
-
-   <form action="" method="POST">
-    
-     <div class="row">
-         
-            <div class="col-md-8 col-xs-12">
-                <div class="card">
-                    <div class="card-body text-dark">
-     
-                    <div class="form-group row col-md-12">
-                        <label class="col-sm-4 col-form-label"> Nis <font color="red"><strong>*</strong></font>
-                        </label>
-
-                        <div class="col-sm-8">
-                            <input 
-                                type="text" 
-                                required 
-                                class="form-control" 
-                                placeholder="*Hanya boleh bersisi angka"  
-                                name="nis"
-                                pattern="[0-9]+"
-                                title="NIS hanya boleh berisi angka tanpa spasi atau huruf."
-                            >
-                        </div>
-                    </div>
-
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Nama"   name="nama">
+            // Untuk Menampilkan Data Secara Berulang Sesuai Data Yang Ada di Database
+            while($data=mysqli_fetch_array($hasil)){
+            ?>
+                                        <tr>
+                                        <td> <?php echo $no++ ?> </td>
+                                            <td> <?php echo $data['mapel'] ?> </td>
+                                            <td class="text-center">
+                                                <div>
+                                                  <form onsubmit="return confirm('Hapus Data Mapel ?');"
+                                                        action="hapus_mapel.php?id_mapel=<?php echo $data ['id_mapel'] ?>" method="POST">
+                                                        
+                                                        <a href="edit_mapel.php?id_mapel=<?php echo $data ['id_mapel'] ?>"
+                                                            class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    </div>>
 
-
-                        <div class="form-group row col-md-12">
-                            <label class="col-sm-4 col-form-label"> Id Kelas <font color="red"><strong>*</strong></font>
-                            </label>
-
-                            <div class="col-sm-8">
-                                <input 
-                                    type="text" 
-                                    required 
-                                    class="form-control" 
-                                    placeholder="Hanya boleh berisi angka"  
-                                    name="id_kelas"
-                                    pattern="[0-9]+"
-                                    title="Id Kelas hanya boleh berisi angka tanpa spasi atau huruf."
-                                >
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Alamat<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Alamat" name="alamat">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Tempat Lahir<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Tempat Lahir" name="tmpt_lahir">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">tgl_lahir<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="date" required="" class="form-control" placeholder="Tanggal Lahir" name="tgl_lahir">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Gender<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <select class="form-control" name="gender">
-                                    <option value="">-- Pilih Gender --</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <select class="form-control" name="agama">
-                                    <option value="">-- Pilih Agama --</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Katolik">Katolik</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Buddha">Buddha</option>
-                                    <option value="Konghucu">Konghucu</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Kode Orang Tua<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Kode Orang Tua" name="kd_ortu">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Tanggal Daftar<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="date" required="" class="form-control" placeholder="Tanggal Daftar" name="tgl_daftar">
-                            </div>
-                        </div>
-
-                        
-                        <div class="form-group col-md-12">
-                            <input type="submit" name="btnSimpan" class="btn btn-warning" value="Simpan Data"><span class="glyphicon glyphicon-check"></span>
-                            
-                            <a href="data_siswa.php" class="btn btn-success">Kembali</a>
-                        </div>
-                      
-                
-                       
-                    </div>
                 </div>
-            </div>
-            <br>
-        </div>
-
-   </form>
-
-</div>
-
-</div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->

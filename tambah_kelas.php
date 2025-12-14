@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Siswa</title>
+    <title>Web Admin - Tabel Kelas</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -51,7 +51,7 @@
                     </form>
 
                     <!-- Topbar Search -->
-                    <!-- <form
+                    <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -62,7 +62,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form> -->
+                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -251,7 +251,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>Tambah Data Siswa</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>Tambah Data Mata PelajaranF</strong></h1>
 </div>
 
 <div class="container">
@@ -260,29 +260,22 @@
             include "koneksi.php";
 
             // Deklarasi Variabel Untuk Menampung Data Inputan
-            $nis         = $_POST['nis'];
-            $nama        = $_POST['nama'];
-            $id_kelas    = $_POST['id_kelas'];
-            $alamat      = $_POST['alamat'];
-            $tmpt_lahir  = $_POST['tmpt_lahir'];
-            $tgl_lahir   = $_POST['tgl_lahir'];
-            $gender      = $_POST['gender'];
-            $agama       = $_POST['agama'];
-            $kd_ortu     = $_POST['kd_ortu'];
-            $tgl_daftar  = $_POST['tgl_daftar'];
+            $kelas   = $_POST['kelas'];
+            $nip   = $_POST['nip'];
+            
 
             // Query Simpan Data
-            $sql = "INSERT INTO tb_siswa (nis, nama, id_kelas, alamat, tmpt_lahir, tgl_lahir, gender, agama, kd_ortu, tgl_daftar)
-                        VALUES ('$nis', '$nama', '$id_kelas', '$alamat', '$tmpt_lahir', '$tgl_lahir', '$gender', '$agama', '$kd_ortu', '$tgl_daftar')";
+            $sql = "INSERT INTO tb_kelas (kelas, nip)
+                        VALUES ('$kelas', '$nip')";
 
             // Eksklusi Perintah SQL dan Cek Koneksi ke Database
             $qrySimpan  = mysqli_query ($konek, $sql);
 
             // Cek Berhasil Atau Gagal Simpan
             if($qrySimpan){
-                echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
+                echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan ✅</div>';
             } else {
-                echo '<div class="alert alert-warning mt-3"><b>Data Gagal Disimpan</></div>';
+                echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan ❌</div>';
             }
         }  
         ?>
@@ -294,109 +287,36 @@
             <div class="col-md-8 col-xs-12">
                 <div class="card">
                     <div class="card-body text-dark">
-     
-                    <div class="form-group row col-md-12">
-                        <label class="col-sm-4 col-form-label"> Nis <font color="red"><strong>*</strong></font>
-                        </label>
-
-                        <div class="col-sm-8">
-                            <input 
-                                type="text" 
-                                required 
-                                class="form-control" 
-                                placeholder="*Hanya boleh bersisi angka"  
-                                name="nis"
-                                pattern="[0-9]+"
-                                title="NIS hanya boleh berisi angka tanpa spasi atau huruf."
-                            >
-                        </div>
-                    </div>
 
 
                         <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Nama"   name="nama">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row col-md-12">
-                            <label class="col-sm-4 col-form-label"> Id Kelas <font color="red"><strong>*</strong></font>
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Nama Kelas<font color="red"><strong>*</strong></font>
                             </label>
-
                             <div class="col-sm-8">
                                 <input 
                                     type="text" 
-                                    required 
+                                    required
                                     class="form-control" 
-                                    placeholder="Hanya boleh berisi angka"  
-                                    name="id_kelas"
-                                    pattern="[0-9]+"
-                                    title="Id Kelas hanya boleh berisi angka tanpa spasi atau huruf."
+                                    placeholder="Input Kelas" 
+                                    name="kelas"
                                 >
                             </div>
                         </div>
 
 
                         <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Alamat<font color="red"><strong>*</strong></font></label>
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                NIP<font color="red"><strong>*</strong></font>
+                            </label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Alamat" name="alamat">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Tempat Lahir<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Tempat Lahir" name="tmpt_lahir">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">tgl_lahir<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="date" required="" class="form-control" placeholder="Tanggal Lahir" name="tgl_lahir">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Gender<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <select class="form-control" name="gender">
-                                    <option value="">-- Pilih Gender --</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <select class="form-control" name="agama">
-                                    <option value="">-- Pilih Agama --</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Katolik">Katolik</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Buddha">Buddha</option>
-                                    <option value="Konghucu">Konghucu</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Kode Orang Tua<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Kode Orang Tua" name="kd_ortu">
-                            </div>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Tanggal Daftar<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="date" required="" class="form-control" placeholder="Tanggal Daftar" name="tgl_daftar">
+                                <input 
+                                    type="text" 
+                                    required
+                                    class="form-control" 
+                                    placeholder="Input NIP" 
+                                    name="nip"
+                                >
                             </div>
                         </div>
 
@@ -404,7 +324,7 @@
                         <div class="form-group col-md-12">
                             <input type="submit" name="btnSimpan" class="btn btn-warning" value="Simpan Data"><span class="glyphicon glyphicon-check"></span>
                             
-                            <a href="data_siswa.php" class="btn btn-success">Kembali</a>
+                            <a href="data_kelas.php" class="btn btn-success">Kembali</a>
                         </div>
                       
                 

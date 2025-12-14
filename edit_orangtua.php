@@ -280,9 +280,6 @@
                     status      ='$status'
                 WHERE id_ortu  ='$_GET[id_ortu]'";
 
-                // Eksekusi query dan cek hasilnya
-                $qrySimpan = mysqli_query($konek, $sql);
-
 
     // Eksklusi Perintah SQL dan Cek Koneksi ke Database
     $qrySimpan  = mysqli_query ($konek, $sql);

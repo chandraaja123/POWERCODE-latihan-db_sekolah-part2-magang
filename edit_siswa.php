@@ -286,19 +286,15 @@ if(isset($_POST["btnSimpan"])){
                         tgl_daftar  ='$tgl_daftar'
                     WHERE id_siswa       ='$_GET[id_siswa]'";
 
-            // Eksekusi query dan cek hasilnya
-            $qrySimpan = mysqli_query($konek, $sql);
+            // Eksklusi Perintah SQL dan Cek Koneksi ke Database
+            $qrySimpan  = mysqli_query ($konek, $sql);
 
-
-   // Eksklusi Perintah SQL dan Cek Koneksi ke Database
-   $qrySimpan  = mysqli_query ($konek, $sql);
-
-   // Cek Berhasil Atau Gagal Simpan
-   if($qrySimpan){
-    echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
-   } else {
-       echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
-   }
+            // Cek Berhasil Atau Gagal Simpan
+            if($qrySimpan){
+                echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
+            } else {
+                echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
+            }
 }  
 
 // Menampilkan Data Dari Database
@@ -356,21 +352,33 @@ $row    = mysqli_fetch_array($hasil);
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">tgl_lahir<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="tgl_lahir" name="tgl_lahir" value ="<?php echo $row['tgl_lahir'] ?>">
+                                <input type="date" required="" class="form-control" placeholder="tgl_lahir" name="tgl_lahir" value ="<?php echo $row['tgl_lahir'] ?>">
                             </div>
                         </div>
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Gender<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="gender" name="gender" value ="<?php echo $row['gender'] ?>">
+                            <select class="form-control" name="gender">
+                                    <option value="">-- Pilih Gender --</option>
+                                    <option value="Laki-laki" <?php if($row['gender']=="Laki-laki") echo "selected";?>>Laki-laki</option>
+                                    <option value="Perempuan" <?php if($row['gender']=="Perempuan") echo "selected";?>>Perempuan</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="agama" name="agama" value ="<?php echo $row['agama'] ?>">
+                            <select class="form-control" name="agama">
+                                    <option value="">-- Pilih Agama --</option>
+                                    <option value="Islam" <?php if($row['agama']=="Islam") echo "selected"; ?>>Islam</option>
+                                    <option value="Kristen" <?php if($row['agama']=="Kristen") echo "selected"; ?>>Kristen</option>
+                                    <option value="Katolik" <?php if($row['agama']=="Katolik") echo "selected"; ?>>Katolik</option>
+                                    <option value="Hindu" <?php if($row['agama']=="Hindu") echo "selected"; ?>>Hindu</option>
+                                    <option value="Buddha" <?php if($row['agama']=="Buddha") echo "selected"; ?>>Buddha</option>
+                                    <option value="Konghucu" <?php if($row['agama']=="Konghucu") echo "selected"; ?>>Konghucu</option>
+                                </select>
                             </div>
                         </div>
 
@@ -384,7 +392,7 @@ $row    = mysqli_fetch_array($hasil);
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Tanggal Daftar<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="tgl_daftar" name="tgl_daftar" value ="<?php echo $row['tgl_daftar'] ?>">
+                                <input type="date" required="" class="form-control" placeholder="tgl_daftar" name="tgl_daftar" value ="<?php echo $row['tgl_daftar'] ?>">
                             </div>
                         </div>
 
