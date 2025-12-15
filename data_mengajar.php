@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Pengguna</title>
+    <title>Web Admin - Tabel Mengajar</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,94 +42,71 @@
 
                 <!-- Panggil Topbar -->
                 <?php include "topbar.php" ?>
-                <!-- Topbar Selesai -->
+                <!-- Topbar Selesai -->    
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>Ubah Data Pengguna</strong></h1>
-</div>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Data Mengajar</h1>
 
-<div class="container">
-    <?php 
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary"> 
+                                <a href="tambah_mengajar.php"
+                            class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
+                        </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>NIP</td>
+                                        <td>Id Mata Pelajaran</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                    <?php
+                                        // Panggil Koneksi
+                                        include "koneksi.php";
 
-        include "koneksi.php";
+                                        $sql     ="select * from tb_mengajar";
+                                        $hasil   = mysqli_query($konek, $sql);
+                                        $no      = 1;
 
-        if(isset($_POST["btnSimpan"])){
-
-        // Deklarasi Variabel Untuk Menampung Data Inputan
-        $nama       = $_POST["nama"];
-        $kata_kunci = $_POST["kata_kunci"];
-
-        // Query Simpan Data
-        $sql = "update tb_pengguna set 
-                    nama                ='$nama', 
-                    kata_kunci          ='$kata_kunci' 
-                where id_pengguna       ='$_GET[id]'";
-
-        // Eksklusi Perintah SQL dan Cek Koneksi ke Database
-        $qrySimpan  = mysqli_query ($konek, $sql);
-
-        // Cek Berhasil Atau Gagal Simpan
-        if($qrySimpan){
-            echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
-        } else {
-            echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
-        }
-        }  
-
-        // Menampilkan Data Dari Database
-        $sql    = "select * from tb_pengguna where id_pengguna ='$_GET[id]'";
-        $hasil  = mysqli_query($konek, $sql);
-        $row    = mysqli_fetch_array($hasil);
-
-
-    ?>
-
-   <form action="" method="POST">
-    
-     <div class="row">
-         
-            <div class="col-md-8 col-xs-12">
-                <div class="card">
-                    <div class="card-body text-dark">
-     
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Nama"  value ="<?php echo $row['nama'] ?>" name="nama">
+                                        // Untuk Menampilkan Data Secara Berulang Sesuai Data Yang Ada di Database
+                                        while($data=mysqli_fetch_array($hasil)){
+                                        ?>
+                                        <tr>
+                                        <td> <?php echo $no++ ?> </td>
+                                            <td> <?php echo $data['nip'] ?> </td>
+                                            <td> <?php echo $data['id_mapel'] ?> </td>
+                                            <td class="text-center">
+                                                <div>
+                                                  <form onsubmit="return confirm('Hapus Data Mengajar ?');"
+                                                        action="hapus_mengajar.php?id_mengajar=<?php echo $data ['id_mengajar'] ?>" method="POST">
+                                                        
+                                                        <a href="edit_mengajar.php?id_mengajar=<?php echo $data ['id_mengajar'] ?>"
+                                                            class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Kata Kunci<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Kata Kunci" name="kata_kunci" value ="<?php echo $row['kata_kunci'] ?>">
-                            </div>
-                        </div>
-
-                        
-                        <div class="form-group col-md-12">
-                            <input type="submit" name="btnSimpan" class="btn btn-warning" value="Simpan Data"><span class="glyphicon glyphicon-check"></span>
-                            
-                            <a href="data_pengguna.php" class="btn btn-success">Kembali</a>
-                        </div>
-                      
-                
-                       
                     </div>
+
                 </div>
-            </div>
-            <br>
-        </div>
-
-   </form>
-
-</div>
-
-</div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->

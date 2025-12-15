@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Pengguna</title>
+    <title>Web Admin - Tabel Mapel</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,50 +42,62 @@
 
                 <!-- Panggil Topbar -->
                 <?php include "topbar.php" ?>
-                <!-- Topbar Selesai -->
+                <!-- Topbar Selesai -->    
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>Ubah Data Pengguna</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>Ubah Data Guru</strong></h1>
 </div>
 
 <div class="container">
-    <?php 
 
+    <?php 
         include "koneksi.php";
 
         if(isset($_POST["btnSimpan"])){
 
         // Deklarasi Variabel Untuk Menampung Data Inputan
-        $nama       = $_POST["nama"];
-        $kata_kunci = $_POST["kata_kunci"];
+            $nip   = $_POST['nip'];
+            $nama   = $_POST['nama'];
+            $nama   = $_POST['alamat'];
+            $nama   = $_POST['tmpt_lahir'];
+            $nama   = $_POST['gender'];
+            $nama   = $_POST['agama'];
+            $nama   = $_POST['telp'];
+            $nama   = $_POST['pendidikan'];
+            $nama   = $_POST['status'];
 
         // Query Simpan Data
-        $sql = "update tb_pengguna set 
-                    nama                ='$nama', 
-                    kata_kunci          ='$kata_kunci' 
-                where id_pengguna       ='$_GET[id]'";
+        $sql = "UPDATE tb_guru SET 
+                        nip             ='$nip',
+                        nama            ='$nama',
+                        alamat          ='$alamat',
+                        tmpt_lahir      ='$tmpt_lahir',
+                        gender          ='$gender',
+                        agama           ='$agama',
+                        telp            ='$telp',
+                        pendidikan      ='$pendidikan',
+                        status          ='$statu',
+                    WHERE id_guru     ='$_GET[id_guru]'";
 
         // Eksklusi Perintah SQL dan Cek Koneksi ke Database
         $qrySimpan  = mysqli_query ($konek, $sql);
 
         // Cek Berhasil Atau Gagal Simpan
         if($qrySimpan){
-            echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan</div>';
+            echo '<div class="alert alert-success mt-3">Data Berhasil Disimpan ✅</div>';
         } else {
-            echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan</div>';
+            echo '<div class="alert alert-danger mt-3">Data Gagal Disimpan ❌</div>';
         }
         }  
 
-        // Menampilkan Data Dari Database
-        $sql    = "select * from tb_pengguna where id_pengguna ='$_GET[id]'";
-        $hasil  = mysqli_query($konek, $sql);
-        $row    = mysqli_fetch_array($hasil);
-
-
+            // Menampilkan Data Lama
+            $sql   = "SELECT * FROM tb_guru WHERE id_guru='$_GET[id_guru]'";
+            $hasil  = mysqli_query($konek, $sql);
+            $row    = mysqli_fetch_array($hasil);
     ?>
 
    <form action="" method="POST">
@@ -97,24 +109,61 @@
                     <div class="card-body text-dark">
      
                         <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                NIP<font color="red"><strong>*</strong></font>
+                            </label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Nama"  value ="<?php echo $row['nama'] ?>" name="nama">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit NIP"  
+                                 value ="<?php echo $row['nip'] ?>" 
+                                 name="nip"
+                                 >
                             </div>
                         </div>
 
+
                         <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Kata Kunci<font color="red"><strong>*</strong></font></label>
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Nama Guru<font color="red"><strong>*</strong></font>
+                            </label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Kata Kunci" name="kata_kunci" value ="<?php echo $row['kata_kunci'] ?>">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit Nama Guru"  
+                                 value ="<?php echo $row['nama'] ?>" 
+                                 name="nama"
+                                 >
                             </div>
                         </div>
+
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Nama Guru<font color="red"><strong>*</strong></font>
+                            </label>
+                            <div class="col-sm-8">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit Nama Guru"  
+                                 value ="<?php echo $row['nama'] ?>" 
+                                 name="nama"
+                                 >
+                            </div>
+                        </div>
+
 
                         
                         <div class="form-group col-md-12">
                             <input type="submit" name="btnSimpan" class="btn btn-warning" value="Simpan Data"><span class="glyphicon glyphicon-check"></span>
                             
-                            <a href="data_pengguna.php" class="btn btn-success">Kembali</a>
+                            <a href="data_kelas.php" class="btn btn-success">Kembali</a>
                         </div>
                       
                 

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Web Admin - Tabel Kelas</title>
+    <title>Web Admin - Tabel Guru</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -48,13 +48,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Data Kelas</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Data Guru</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary"> 
-                                <a href="tambah_kelas.php"
+                                <a href="tambah_guru.php"
                             class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
                         </h6>
                         </div>
@@ -64,8 +64,15 @@
                                     <thead>
                                     <tr>
                                         <td>No.</td>
-                                        <td>Nama Kelas</td>
                                         <td>NIP</td>
+                                        <td>Nama Guru</td>
+                                        <td>Alamat</td>
+                                        <td>Tempat Kelahiran</td>
+                                        <td>Gender</td>
+                                        <td>Agama</td>
+                                        <td>No Telepon</td>
+                                        <td>Pendidikan</td>
+                                        <td>Status</td>
                                         <td>Aksi</td>
                                     </tr>
                                     </thead>
@@ -75,7 +82,7 @@
                                         // Panggil Koneksi
                                         include "koneksi.php";
 
-                                        $sql     ="select * from tb_kelas";
+                                        $sql     ="select * from tb_guru";
                                         $hasil   = mysqli_query($konek, $sql);
                                         $no      = 1;
 
@@ -84,14 +91,21 @@
                                         ?>
                                         <tr>
                                         <td> <?php echo $no++ ?> </td>
-                                            <td> <?php echo $data['kelas'] ?> </td>
                                             <td> <?php echo $data['nip'] ?> </td>
+                                            <td> <?php echo $data['nama'] ?> </td>
+                                            <td> <?php echo $data['alamat'] ?> </td>
+                                            <td> <?php echo $data['tmpt_lahir'] ?> </td>
+                                            <td> <?php echo $data['gender'] ?> </td>
+                                            <td> <?php echo $data['agama'] ?> </td>
+                                            <td> <?php echo $data['telp'] ?> </td>
+                                            <td> <?php echo $data['pendidikan'] ?> </td>
+                                            <td> <?php echo $data['status'] ?> </td>
                                             <td class="text-center">
                                                 <div>
-                                                  <form onsubmit="return confirm('Hapus Data Kelas ?');"
-                                                        action="hapus_kelas.php?id_kelas=<?php echo $data ['id_kelas'] ?>" method="POST">
+                                                  <form onsubmit="return confirm('Hapus Data Guru ?');"
+                                                        action="hapus_guru.php?id_guru=<?php echo $data ['id_guru'] ?>" method="POST">
                                                         
-                                                        <a href="edit_kelas.php?id_kelas=<?php echo $data ['id_kelas'] ?>"
+                                                        <a href="edit_guru.php?id_guru=<?php echo $data ['id_guru'] ?>"
                                                             class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                                     </form>
