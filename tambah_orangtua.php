@@ -89,12 +89,26 @@
                     <div class="card-body text-dark">
      
                     <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Kode Orang Tua<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Kode Orang Tua" name="kd_ortu">
-                            </div>
+                        <label class="col-sm-4 col-form-label">
+                            Kode Orang Tua <font color="red"><strong>*</strong></font>
+                        </label>
+                        <div class="col-sm-8">
+                            <input 
+                                type="tel"
+                                class="form-control"
+                                name="telp"
+                                placeholder="Input Kode Ortu"
+                                required
+                                pattern="[0-9]+"
+                                title="kode ortu hanya boleh berisi angka!"
+                            >
+                            <small class="form-text text-muted">
+                                *hanya angka, tanpa spasi atau simbol
+                            </small>
                         </div>
+                    </div>
 
+                        
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Nama<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
@@ -104,18 +118,33 @@
 
 
                         <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Alamat<font color="red"><strong>*</strong></font></label>
+                            <label class="col-sm-4 col-form-label">Alamat<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
                                 <input type="text" required="" class="form-control" placeholder="Alamat" name="alamat">
                             </div>
                         </div>
 
+
                         <div class="form-group row col-md-12">
-                            <label for="inputPassword" class="col-sm-4 col-form-label">Telepon<font color="red"><strong>*</strong></font></label>
-                            <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Telepon" name="telp">
-                            </div>
+                                <label class="col-sm-4 col-form-label">
+                                    Telepon <font color="red"><strong>*</strong></font>
+                                </label>
+                                <div class="col-sm-8">
+                                    <input 
+                                        type="tel"
+                                        class="form-control"
+                                        name="telp"
+                                        placeholder="Contoh: 081234567890"
+                                        required
+                                        pattern="[0-9]+"
+                                        title="Nomor telepon hanya boleh berisi angka"
+                                    >
+                                    <small class="form-text text-muted">
+                                        *Hanya angka, tanpa spasi atau simbol (contoh: 081234567890)
+                                    </small>
+                                </div>
                         </div>
+
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Perkerjaan<font color="red"><strong>*</strong></font></label>
@@ -124,12 +153,22 @@
                             </div>
                         </div>
                         
+
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Agomo" name="agama">
+                                <select class="form-control" name="agama">
+                                    <option value="">-- Pilih Agama --</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Katolik">Katolik</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddha">Buddha</option>
+                                    <option value="Konghucu">Konghucu</option>
+                                </select>
                             </div>
                         </div>
+
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Status Orang Tua<font color="red"><strong>*</strong></font></label>

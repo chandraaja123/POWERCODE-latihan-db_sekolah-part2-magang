@@ -55,9 +55,16 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary"> 
                                 <a href="tambah_guru.php"
-                            class="btn btn-sm btn-success"><i class="fa fa-save"></i> Tambah Data</a>
-                        </h6>
+                                class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah Data</a>
+                                
+                                <a href="excel_guru.php"
+                                class="btn btn-sm btn-warning"><i class="fas fa-print"></i> Excel</a>
+
+                                <a href="excel_guru.php"
+                                class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i> pdf</a>
+                            </h6>
                         </div>
+                        
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

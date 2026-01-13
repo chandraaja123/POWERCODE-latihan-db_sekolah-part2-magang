@@ -24,7 +24,7 @@
             <!-- Nav Item - Data Siswa -->
             <li class="nav-item active">
                 <a class="nav-link" href="data_siswa.php">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fas fa-fw fa-user-graduate"></i>
                     <span>Data Siswa</span></a>
             </li>
 
@@ -38,7 +38,7 @@
             <!-- Nav Item - Data Kelas -->
             <li class="nav-item active">
                 <a class="nav-link" href="data_kelas.php">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fas fa-fw fa-folder"></i>
                     <span>Data Kelas</span></a>
             </li>
 
@@ -52,7 +52,7 @@
             <!-- Nav Item - Data Guru -->
             <li class="nav-item active">
                 <a class="nav-link" href="data_guru.php">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fas fa-fw fa-user-tie"></i>
                     <span>Data Guru</span></a>
             </li>
 

@@ -66,11 +66,11 @@
                                     <td>No.</td>
                                         <td>Kode Orang Tua</td>
                                         <td>Nama Orang Tua</td>
-                                        <td>Alamat Orang Tua</td>
-                                        <td>Telepon Orang Tua</td>
-                                        <td>Pekerjaan Orang Tua</td>
-                                        <td>Agama Orang Tua</td>
-                                        <td>Status Orang Tua</td>
+                                        <td>Alamat</td>
+                                        <td>Telepon</td>
+                                        <td>Pekerjaan</td>
+                                        <td>Agama</td>
+                                        <td>Status</td>
                                         <td>Aksi</td>
                                     </tr>
                                     </thead>

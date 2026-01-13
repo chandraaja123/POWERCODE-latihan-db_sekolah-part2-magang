@@ -60,15 +60,15 @@
         if(isset($_POST["btnSimpan"])){
 
         // Deklarasi Variabel Untuk Menampung Data Inputan
-            $nip   = $_POST['nip'];
-            $nama   = $_POST['nama'];
-            $nama   = $_POST['alamat'];
-            $nama   = $_POST['tmpt_lahir'];
-            $nama   = $_POST['gender'];
-            $nama   = $_POST['agama'];
-            $nama   = $_POST['telp'];
-            $nama   = $_POST['pendidikan'];
-            $nama   = $_POST['status'];
+            $nip        = $_POST['nip'];
+            $nama       = $_POST['nama'];
+            $alamat     = $_POST['alamat'];
+            $tmpt_lahir = $_POST['tmpt_lahir'];
+            $gender     = $_POST['gender'];
+            $agama      = $_POST['agama'];
+            $telp       = $_POST['telp'];
+            $pendidikan = $_POST['pendidikan'];
+            $status     = $_POST['status'];
 
         // Query Simpan Data
         $sql = "UPDATE tb_guru SET 
@@ -80,7 +80,7 @@
                         agama           ='$agama',
                         telp            ='$telp',
                         pendidikan      ='$pendidikan',
-                        status          ='$statu',
+                        status          ='$status',
                     WHERE id_guru     ='$_GET[id_guru]'";
 
         // Eksklusi Perintah SQL dan Cek Koneksi ke Database
@@ -144,16 +144,117 @@
 
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">
-                                Nama Guru<font color="red"><strong>*</strong></font>
+                                Alamat<font color="red"><strong>*</strong></font>
                             </label>
                             <div class="col-sm-8">
                                 <input
                                  type="text" 
                                  required
                                  class="form-control" 
-                                 placeholder="Edit Nama Guru"  
-                                 value ="<?php echo $row['nama'] ?>" 
-                                 name="nama"
+                                 placeholder="Edit Alamat"  
+                                 value ="<?php echo $row['alamat'] ?>" 
+                                 name="alamat"
+                                 >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Tempat Kelahiran<font color="red"><strong>*</strong></font>
+                            </label>
+                            <div class="col-sm-8">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit Alamat"  
+                                 value ="<?php echo $row['tmpt_lahir'] ?>" 
+                                 name="tmpt_lahir"
+                                 >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Gender<font color="red"><strong>*</strong></font>
+                            </label>
+                            <div class="col-sm-8">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit Alamat"  
+                                 value ="<?php echo $row['gender'] ?>" 
+                                 name="gender"
+                                 >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
+                            <div class="col-sm-8">
+                            <select class="form-control" name="agama">
+                                    <option value="">-- Pilih Agama --</option>
+                                    <option value="Islam" <?php if($row['agama']=="Islam") echo "selected"; ?>>Islam</option>
+                                    <option value="Kristen" <?php if($row['agama']=="Kristen") echo "selected"; ?>>Kristen</option>
+                                    <option value="Katolik" <?php if($row['agama']=="Katolik") echo "selected"; ?>>Katolik</option>
+                                    <option value="Hindu" <?php if($row['agama']=="Hindu") echo "selected"; ?>>Hindu</option>
+                                    <option value="Buddha" <?php if($row['agama']=="Buddha") echo "selected"; ?>>Buddha</option>
+                                    <option value="Konghucu" <?php if($row['agama']=="Konghucu") echo "selected"; ?>>Konghucu</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Telepon<font color="red"><strong>*</strong></font>
+                            </label>
+                            <div class="col-sm-8">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit Alamat"  
+                                 value ="<?php echo $row['telp'] ?>" 
+                                 name="telp"
+                                 >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Pendidikan<font color="red"><strong>*</strong></font>
+                            </label>
+                            <div class="col-sm-8">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit Alamat"  
+                                 value ="<?php echo $row['pendidikan'] ?>" 
+                                 name="pendidikan"
+                                 >
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row col-md-12">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">
+                                Status<font color="red"><strong>*</strong></font>
+                            </label>
+                            <div class="col-sm-8">
+                                <input
+                                 type="text" 
+                                 required
+                                 class="form-control" 
+                                 placeholder="Edit Alamat"  
+                                 value ="<?php echo $row['status'] ?>" 
+                                 name="status"
                                  >
                             </div>
                         </div>
@@ -163,7 +264,7 @@
                         <div class="form-group col-md-12">
                             <input type="submit" name="btnSimpan" class="btn btn-warning" value="Simpan Data"><span class="glyphicon glyphicon-check"></span>
                             
-                            <a href="data_kelas.php" class="btn btn-success">Kembali</a>
+                            <a href="data_guru.php" class="btn btn-success">Kembali</a>
                         </div>
                       
                 

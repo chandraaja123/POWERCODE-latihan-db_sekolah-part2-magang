@@ -143,7 +143,15 @@
                         <div class="form-group row col-md-12">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Agama<font color="red"><strong>*</strong></font></label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" placeholder="Agomo" name="agama" value ="<?php echo $row['agama'] ?>">
+                            <select class="form-control" name="agama">
+                                    <option value="">-- Pilih Agama --</option>
+                                    <option value="Islam" <?php if($row['agama']=="Islam") echo "selected"; ?>>Islam</option>
+                                    <option value="Kristen" <?php if($row['agama']=="Kristen") echo "selected"; ?>>Kristen</option>
+                                    <option value="Katolik" <?php if($row['agama']=="Katolik") echo "selected"; ?>>Katolik</option>
+                                    <option value="Hindu" <?php if($row['agama']=="Hindu") echo "selected"; ?>>Hindu</option>
+                                    <option value="Buddha" <?php if($row['agama']=="Buddha") echo "selected"; ?>>Buddha</option>
+                                    <option value="Konghucu" <?php if($row['agama']=="Konghucu") echo "selected"; ?>>Konghucu</option>
+                                </select>
                             </div>
                         </div>
 
